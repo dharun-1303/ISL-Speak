@@ -1,5 +1,3 @@
-
-
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 import cv2
@@ -25,7 +23,6 @@ class SignLanguageTransformer(VideoTransformerBase):
         label = class_labels[pred_index]
         confidence = np.max(prediction)
 
-        # Display prediction on frame
         cv2.putText(img, f"{label} ({confidence*100:.1f}%)", (10, 40),
                     cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 255, 0), 3)
         return img
@@ -33,5 +30,4 @@ class SignLanguageTransformer(VideoTransformerBase):
 # Streamlit UI
 st.title("Indian Sign Language Interpreter")
 st.write("Show a hand sign to your webcam. Model will predict the sign.")
-
 webrtc_streamer(key="sign", video_transformer_factory=SignLanguageTransformer)
